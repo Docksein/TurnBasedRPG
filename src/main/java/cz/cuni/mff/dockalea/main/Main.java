@@ -1,4 +1,4 @@
-package org.example;
+package cz.cuni.mff.dockalea.main;
 
 public class Main {
     public static void main(String[] args) {
