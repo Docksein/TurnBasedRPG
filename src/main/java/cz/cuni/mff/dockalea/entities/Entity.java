@@ -6,7 +6,7 @@ public abstract class Entity {
     public abstract int getCurrentHealth();
     public abstract int getLevel();
 
-    public abstract int setCurrentHealth();
+    public abstract void setCurrentHealth(int health);
 
     public abstract int attack();
     public abstract int defend();
