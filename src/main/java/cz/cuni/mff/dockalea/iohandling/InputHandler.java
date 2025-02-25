@@ -3,9 +3,9 @@ package cz.cuni.mff.dockalea.iohandling;
 import java.util.Scanner;
 
 public class InputHandler {
-    private Scanner input_scanner = new Scanner(System.in);
+    private static Scanner input_scanner = new Scanner(System.in);
 
-    public int getNextChoice(int actionChoices, String prompt){
+    public static int getNextChoice(int actionChoices, String prompt){
         int choice = -1;
 
         System.out.println(prompt);
@@ -19,5 +19,12 @@ public class InputHandler {
         }
 
         return choice;
+    }
+
+    public static void printSeparator(int length) {
+        for (int i = 0; i < length; ++i) {
+            System.out.print('=');
+        }
+        System.out.println();
     }
 }

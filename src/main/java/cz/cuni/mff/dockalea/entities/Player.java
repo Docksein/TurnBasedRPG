@@ -14,6 +14,9 @@ public class Player extends Entity {
         this.xp = xp;
     }
 
+    public int getXp() {
+        return xp;
+    }
     public int getMaxHealth() {
         return maxHealth;
     }
