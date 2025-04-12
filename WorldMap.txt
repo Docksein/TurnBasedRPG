@@ -1,0 +1,5 @@
+# Room 1 | Boss Room | | |
+This is the first room.
+Good Luck!
+# Boss Room | | Room 1 | |
+This is the boss room.

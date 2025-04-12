@@ -1,15 +1,21 @@
 package cz.cuni.mff.dockalea.main;
 
 import cz.cuni.mff.dockalea.entities.Player;
+import cz.cuni.mff.dockalea.environment.Map;
+import cz.cuni.mff.dockalea.environment.Room;
 import cz.cuni.mff.dockalea.iohandling.InputHandler;
+
+import java.util.Hashtable;
 
 public class Main {
     private static boolean isRunning = true;
     private static final int sepLength = 30;
     private static Player player = new Player(100, 1, 0);
+    private static Hashtable<String, Room> map;
 
     public static void main(String[] args) {
-
+        map = Map.loadMapFromTxtFile("WorldMap.txt");
+        //map.forEach((k,v) -> System.out.println(v));
     }
 
     public static void gameLoop() {
