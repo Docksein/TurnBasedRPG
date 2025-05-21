@@ -7,6 +7,7 @@ public class Enemy extends Entity {
         int max = level + 2;
         int min = level - 3;
         int range = max - min + 1;
+        //TODO: if level is negative, assign it to 0
         this.level = (int)(Math.random() * range) + min;
         this.name = name;
     }
