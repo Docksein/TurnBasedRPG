@@ -19,7 +19,7 @@ public class Map {
         return world_map;
     }
 
-    private static Hashtable<String, Room> loadMapBufferReader(BufferedReader reader) throws IOException {
+    public static Hashtable<String, Room> loadMapBufferReader(BufferedReader reader) throws IOException {
         Hashtable<String, Room> world_map = new Hashtable<>();
         String line;
         String currentRoomName = null;
