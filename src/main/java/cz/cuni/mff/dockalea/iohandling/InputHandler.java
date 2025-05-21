@@ -9,16 +9,17 @@ public class InputHandler {
     private static Scanner input_scanner = new Scanner(System.in);
     public static int sepLength;
 
-    public static int getNextChoice(int actionChoices, String prompt){
+    public static int getNextChoice(int actionChoices, String prompt) {
         int choice = -1;
 
         System.out.println(prompt);
-        while (choice < 1 || choice > actionChoices){
+        while (choice < 1 || choice > actionChoices) {
             try {
+                System.out.println("Please select a number from 1 to " + actionChoices);
                 choice = Integer.parseInt(input_scanner.next());
             } catch (NumberFormatException e) {
-                choice = - 1;
-                System.out.println("Please select a choice from 1 to " + actionChoices);
+                choice = -1;
+                System.out.println("Wrong input. Please select a number from 1 to " + actionChoices);
             }
         }
 
@@ -39,9 +40,9 @@ public class InputHandler {
     public static void printMenu() {
         System.out.println("Choose an action:");
         printSeparator(sepLength);
-        System.out.println("(1) Continue");
-        System.out.println("(2) Character info");
-        System.out.println("(3) Exit");
+        System.out.println("1. Continue");
+        System.out.println("2. Character info");
+        System.out.println("3. Exit");
     }
 
 
@@ -52,25 +53,41 @@ public class InputHandler {
         System.out.println();
     }
 
-    public static void printRoom(Room r){
-        System.out.println(r.Name);
-        System.out.println(r.Description);
-        int i = 0;
-        if (r.North != null){
-            ++i;
-            System.out.println(i + r.North);
+    public static int moveInCurrentRoom(Room currentRoomObj) {
+        if (currentRoomObj == null) {
+            System.out.println("Error: Current room not found in map!");
+            return 0;
         }
-        if (r.South != null) {
-            ++i;
-            System.out.println(i + r.South);
+
+        System.out.println("\n=== " + currentRoomObj.Name + " ===");
+        System.out.println(currentRoomObj.Description);
+        System.out.println("\nAvailable directions:");
+
+        int directionCount = 0;
+
+        if (currentRoomObj.North != null) {
+            directionCount++;
+            System.out.println(directionCount + ". North (to " + currentRoomObj.North + ")");
         }
-        if (r.East != null) {
-            ++i;
-            System.out.println(r.East);
+
+        if (currentRoomObj.South != null) {
+            directionCount++;
+            System.out.println(directionCount + ". South (to " + currentRoomObj.South + ")");
         }
-        if (r.West != null) {
-            ++i;
-            System.out.println(r.West);
+
+        if (currentRoomObj.East != null) {
+            directionCount++;
+            System.out.println(directionCount + ". East (to " + currentRoomObj.East + ")");
         }
+
+        if (currentRoomObj.West != null) {
+            directionCount++;
+            System.out.println(directionCount + ". West (to " + currentRoomObj.West + ")");
+        }
+
+        directionCount++;
+        System.out.println(directionCount + ". Stay here");
+
+        return getNextChoice(directionCount, "Where you want to go: ");
     }
 }
