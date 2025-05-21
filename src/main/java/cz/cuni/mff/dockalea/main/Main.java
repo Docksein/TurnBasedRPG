@@ -15,6 +15,7 @@ public class Main {
     private static String currentRoom;
 
     public static void main(String[] args) {
+        // Load Rooms and check if the current one is present
         RoomData mapData = Map.loadMapFromTxtFile("WorldMap.txt");
         map = mapData.rooms;
         currentRoom = mapData.currentRoomName;
