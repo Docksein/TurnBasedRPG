@@ -129,8 +129,8 @@ public class Main {
 
         System.out.println("You explore the room carefully...");
 
-        // 40% chance to find item
-        if (Math.random() < 0.4) {
+        // 60% chance to find item
+        if (Math.random() < 0.6) {
             Item foundItem = ItemGenerator.generateRandomItem(player.getLevel());
             System.out.println("You found a " + foundItem.getName() + "!");
             player.getInventory().addItem(foundItem);
