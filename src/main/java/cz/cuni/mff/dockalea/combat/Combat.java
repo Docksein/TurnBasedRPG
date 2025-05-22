@@ -11,11 +11,13 @@ public class Combat {
     private final Player player;
     private final Enemy enemy;
     private boolean combatActive;
+    private boolean playerGuarding;
 
     public Combat(Player player, Enemy enemy) {
         this.player = player;
         this.enemy = enemy;
         this.combatActive = true;
+        this.playerGuarding = false;
     }
 
     public boolean startCombat() {
@@ -29,6 +31,8 @@ public class Combat {
             if (enemy.isAlive()) {
                 enemyTurn();
             }
+            // Reset guard state after enemy turn
+            playerGuarding = false;
         }
 
         return resolveCombat();
@@ -80,7 +84,7 @@ public class Combat {
 
     private void playerGuard() {
         System.out.println("You prepare to guard against the next attack!");
-        // Guard effect is handled in enemyTurn()
+        playerGuarding = true;
     }
 
     private void useItem() {
@@ -120,8 +124,20 @@ public class Combat {
         System.out.println("\n--- Enemy Turn ---");
         int damage = enemy.attack();
 
+        if (playerGuarding) {
+            int guardedSuccesfully = player.defend();
+            if (guardedSuccesfully == 0) {
+                damage = 0;
+            } else {
+                damage = damage / 2;
+            }
+        }
+
         player.takeDamage(damage);
-        System.out.println("You take " + damage + " damage!");
+        if (damage > 0) {
+            System.out.println("You take " + damage + " damage!");
+        }
+        InputHandler.waitForEnter();
 
         if (!player.isAlive()) {
             System.out.println("You have been defeated!");
