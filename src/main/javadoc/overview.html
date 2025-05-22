@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Turn-Based RPG Game - Overview</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="header">
+    <h1>Turn-Based RPG Game</h1>
+    <div class="subTitle">
+        <div class="block">A Java-based text adventure RPG with combat, exploration, and inventory management</div>
+    </div>
+</div>
+
+<div class="contentContainer">
+    <section>
+        <h2>Overview</h2>
+        <p>
+            This is a turn-based RPG game implemented in Java that combines room-based dungeon crawling
+            with combat and inventory management. The player navigates through interconnected
+            rooms, encounters various enemies, collects items, and progresses through levels.
+        </p>
+    </section>
+
+    <section>
+        <h2>Core Components</h2>
+
+        <h3>Entity System</h3>
+        <ul>
+            <li><strong>Entity</strong> - Abstract base class for all game characters</li>
+            <li><strong>Player</strong> - Represents the player character with XP, leveling, and inventory</li>
+            <li><strong>Enemy</strong> - Represents hostile creatures with different types (common/boss)</li>
+        </ul>
+
+        <h3>Environment</h3>
+        <ul>
+            <li><strong>Map</strong> - Class that loads map data from a text file as a hashtable of rooms</li>
+            <li><strong>Room</strong> - Represents a single room with name, description and optional directions to other
+                rooms
+            </li>
+        </ul>
+
+
+        <h3>Item System</h3>
+        <ul>
+            <li><strong>Item</strong> - Abstract base class for all usable items</li>
+            <li><strong>Weapon</strong> - Equipable item that increases player damage</li>
+            <li><strong>HealthPotion</strong> - Consumable items that restore health</li>
+            <li><strong>StrengthPotion</strong> - Temporary damage boosters for combat encounters</li>
+            <li><strong>Inventory</strong> - Container system with weapon slot and item storage</li>
+        </ul>
+
+        <h3>Game Systems</h3>
+        <ul>
+            <li><strong>Combat</strong> - Turn-based battle system with multiple player actions</li>
+            <li><strong>EnemyGenerator</strong> - Enemy creation based on player level and room name</li>
+            <li><strong>ItemGenerator</strong> - Random item generation with level scaling</li>
+        </ul>
+
+        <h3>User Interface</h3>
+        <ul>
+            <li><strong>InputHandler</strong> - Handles all user input and menu displays</li>
+            <li><strong>Main</strong> - Game loop and state management</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Game Flow</h2>
+        <ol>
+            <li><strong>Room Navigation</strong> - Player moves between connected rooms</li>
+            <li><strong>Enemy Encounters</strong> - Enemies spawn in unvisited rooms, bosses in designated boss
+                rooms
+            </li>
+            <li><strong>Combat Resolution</strong> - Turn-based combat with attack, guard, item use, and flee
+                options
+            </li>
+            <li><strong>Exploration</strong> - Players can search rooms for hidden items</li>
+            <li><strong>Character Progression</strong> - XP gain leads to level increases and stat improvements</li>
+            <li><strong>Inventory Management</strong> - Collect, equip, use, and discard items</li>
+        </ol>
+    </section>
+</div>
+</body>
+</html>
