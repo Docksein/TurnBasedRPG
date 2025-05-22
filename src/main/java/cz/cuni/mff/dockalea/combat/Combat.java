@@ -22,6 +22,7 @@ public class Combat {
         System.out.println("\n=== COMBAT STARTED ===");
         System.out.println("You encounter a " + enemy.getName() + " (Level " + enemy.getLevel() + ")!");
         System.out.println("Enemy Health: " + enemy.getCurrentHealth() + "/" + enemy.getMaxHealth());
+        InputHandler.waitForEnter();
 
         while (combatActive && player.isAlive() && enemy.isAlive()) {
             playerTurn();
@@ -131,7 +132,10 @@ public class Combat {
         player.clearTemporaryBoosts();
 
         if (!player.isAlive()) {
+            InputHandler.printSeparator();
             System.out.println("GAME OVER!");
+            InputHandler.printSeparator();
+            InputHandler.waitForEnter();
             return false;
         }
 
@@ -145,6 +149,19 @@ public class Combat {
                 player.getInventory().addItem(droppedItem);
             }
 
+            if (enemy.isBoss()) {
+                System.out.println("\nCongratulations! You have defeated the boss " + enemy.getName() + "!");
+                System.out.println("1. Continue playing");
+                System.out.println("2. Quit game");
+
+                int choice = InputHandler.getNextChoice(2, "Would you like to continue?");
+                if (choice == 2) {
+                    System.out.println("Thanks for playing!");
+                    System.exit(0);
+                }
+            }
+
+            InputHandler.waitForEnter();
             return true;
         }
 

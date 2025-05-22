@@ -70,12 +70,12 @@ public class Enemy extends Entity {
 
     /**
      * Determines if the enemy drops an item after defeat.
-     * 30% chance to drop an item.
+     * 50% chance to drop an item.
      *
      * @return a generated {@code Item}, or {@code null} if no item drops
      */
     public Item dropItem() {
-        if (Math.random() < 0.3) {
+        if (Math.random() < 0.5) {
             return ItemGenerator.generateRandomItem(level);
         }
         return null;

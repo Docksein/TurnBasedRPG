@@ -10,8 +10,10 @@ import cz.cuni.mff.dockalea.environment.RoomData;
 import cz.cuni.mff.dockalea.iohandling.InputHandler;
 import cz.cuni.mff.dockalea.items.Item;
 import cz.cuni.mff.dockalea.items.ItemGenerator;
+import cz.cuni.mff.dockalea.items.Weapon;
 
 import java.util.Hashtable;
+import java.util.List;
 
 public class Main {
     private static boolean isRunning = true;
@@ -58,7 +60,7 @@ public class Main {
             room.setVisited(true);
 
             InputHandler.printRoomMenu();
-            int input = InputHandler.getNextChoice(4, "Choice: ");
+            int input = InputHandler.getNextChoice(5, "Choice: ");
 
             switch (input) {
                 case 1:
@@ -71,6 +73,9 @@ public class Main {
                     InputHandler.printCharacterStats(player);
                     break;
                 case 4:
+                    manageInventory();
+                    break;
+                case 5:
                     isRunning = false;
                     break;
             }
@@ -113,6 +118,81 @@ public class Main {
         }
 
         room.setExplored(true);
+        InputHandler.waitForEnter();
+    }
+
+    private static void manageInventory() {
+        System.out.println("\n=== INVENTORY MANAGEMENT ===");
+        System.out.println("1. Use/Equip Item");
+        System.out.println("2. Discard Item");
+        System.out.println("3. Back to main menu");
+
+        int choice = InputHandler.getNextChoice(3, "Choose action: ");
+
+        switch (choice) {
+            case 1:
+                useEquipItem();
+                break;
+            case 2:
+                discardItem();
+                break;
+            case 3:
+                return;
+        }
+    }
+
+    private static void useEquipItem() {
+        if (player.getInventory().isEmpty()) {
+            System.out.println("Your inventory is empty!");
+            InputHandler.waitForEnter();
+            return;
+        }
+
+        System.out.println("\nYour items:");
+        List<Item> items = player.getInventory().getItems();
+        for (int i = 0; i < items.size(); i++) {
+            Item item = items.get(i);
+            System.out.println((i + 1) + ". " + item.getName() + " (" + item.getType() + ") - " + item.getDescription());
+        }
+        System.out.println((items.size() + 1) + ". Cancel");
+
+        int choice = InputHandler.getNextChoice(items.size() + 1, "Choose item to use/equip: ");
+
+        if (choice <= items.size()) {
+            Item selectedItem = items.get(choice - 1);
+            selectedItem.use(player);
+
+            // Remove item from inventory if it's consumable (not a weapon)
+            if (!(selectedItem instanceof Weapon)) {
+                player.getInventory().removeItem(selectedItem);
+            }
+        }
+        InputHandler.waitForEnter();
+    }
+
+    private static void discardItem() {
+        if (player.getInventory().isEmpty()) {
+            System.out.println("Your inventory is empty!");
+            InputHandler.waitForEnter();
+            return;
+        }
+
+        System.out.println("\nYour items:");
+        List<Item> items = player.getInventory().getItems();
+        for (int i = 0; i < items.size(); i++) {
+            Item item = items.get(i);
+            System.out.println((i + 1) + ". " + item.getName() + " (" + item.getType() + ")");
+        }
+        System.out.println((items.size() + 1) + ". Cancel");
+
+        int choice = InputHandler.getNextChoice(items.size() + 1, "Choose item to discard: ");
+
+        if (choice <= items.size()) {
+            Item selectedItem = items.get(choice - 1);
+            player.getInventory().removeItem(selectedItem);
+            System.out.println("Discarded " + selectedItem.getName() + ".");
+        }
+        InputHandler.waitForEnter();
     }
 
     public static void move() {

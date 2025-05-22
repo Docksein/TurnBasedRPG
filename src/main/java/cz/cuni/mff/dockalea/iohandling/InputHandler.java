@@ -45,6 +45,12 @@ public class InputHandler {
             }
         }
         System.out.println();
+        waitForEnter();
+    }
+
+    public static void waitForEnter() {
+        System.out.println("Press Enter to continue...");
+        input_scanner.nextLine();
     }
 
     public static void printRoomMenu() {
@@ -53,7 +59,8 @@ public class InputHandler {
         System.out.println("1. Move to another room");
         System.out.println("2. Explore current room");
         System.out.println("3. Character info");
-        System.out.println("4. Exit");
+        System.out.println("4. Manage inventory");
+        System.out.println("5. Exit");
     }
 
     public static void printSeparator() {
