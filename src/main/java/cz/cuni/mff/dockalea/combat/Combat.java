@@ -7,12 +7,22 @@ import cz.cuni.mff.dockalea.items.Item;
 
 import java.util.List;
 
+/**
+ * Manages the combat interactions between the player and an enemy.
+ * Handles turn-based attacks, guarding, using items, and fleeing.
+ */
 public class Combat {
     private final Player player;
     private final Enemy enemy;
     private boolean combatActive;
     private boolean playerGuarding;
 
+    /**
+     * Initializes a new combat session.
+     *
+     * @param player The player character.
+     * @param enemy  The enemy character.
+     */
     public Combat(Player player, Enemy enemy) {
         this.player = player;
         this.enemy = enemy;
@@ -20,6 +30,11 @@ public class Combat {
         this.playerGuarding = false;
     }
 
+    /**
+     * Begins and manages the combat loop until resolved.
+     *
+     * @return True if the player survives; false if defeated.
+     */
     public boolean startCombat() {
         System.out.println("\n=== COMBAT STARTED ===");
         System.out.println("You encounter a " + enemy.getName() + " (Level " + enemy.getLevel() + ")!");
@@ -38,6 +53,9 @@ public class Combat {
         return resolveCombat();
     }
 
+    /**
+     * Handles the player's turn, including choosing actions.
+     */
     private void playerTurn() {
         System.out.println("\n--- Your Turn ---");
         System.out.println("Your Health: " + player.getCurrentHealth() + "/" + player.getMaxHealth());
@@ -72,6 +90,9 @@ public class Combat {
         }
     }
 
+    /**
+     * Processes a standard attack from the player to the enemy.
+     */
     private void playerAttack() {
         int damage = player.attack();
         enemy.takeDamage(damage);
@@ -82,11 +103,17 @@ public class Combat {
         }
     }
 
+    /**
+     * Sets the player into a guarding state for reduced damage.
+     */
     private void playerGuard() {
         System.out.println("You prepare to guard against the next attack!");
         playerGuarding = true;
     }
 
+    /**
+     * Allows the player to use an item from their inventory.
+     */
     private void useItem() {
         if (player.getInventory().isEmpty()) {
             System.out.println("You have no items to use!");
@@ -110,6 +137,9 @@ public class Combat {
         }
     }
 
+    /**
+     * Attempts to flee from the combat.
+     */
     private void flee() {
         // 70% chance to flee successfully
         if (Math.random() < 0.7) {
@@ -120,6 +150,9 @@ public class Combat {
         }
     }
 
+    /**
+     * Handles the enemy's turn and applies damage to the player.
+     */
     private void enemyTurn() {
         System.out.println("\n--- Enemy Turn ---");
         int damage = enemy.attack();
@@ -144,6 +177,11 @@ public class Combat {
         }
     }
 
+    /**
+     * Resolves combat results, including rewards or death consequences.
+     *
+     * @return True if the player won or successfully fled; false if defeated.
+     */
     private boolean resolveCombat() {
         player.clearTemporaryBoosts();
 

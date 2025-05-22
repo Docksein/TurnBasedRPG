@@ -6,10 +6,29 @@ import cz.cuni.mff.dockalea.items.Item;
 
 import java.util.Scanner;
 
+/**
+ * Handles user input and displays menus and prompts to the player.
+ * Provides utility methods for user interactions during the game.
+ */
 public class InputHandler {
+    /**
+     * Scanner used to receive user input from the console.
+     */
     private static Scanner input_scanner = new Scanner(System.in);
+
+    /**
+     * Length of the visual separator line printed in menus.
+     */
     public static int sepLength = 40;
 
+
+    /**
+     * Prompts the user to make a choice between numbered options.
+     *
+     * @param actionChoices The number of available choices.
+     * @param prompt        The text prompt to display before input.
+     * @return The validated user choice.
+     */
     public static int getNextChoice(int actionChoices, String prompt) {
         int choice = -1;
 
@@ -27,6 +46,11 @@ public class InputHandler {
         return choice;
     }
 
+    /**
+     * Displays the character's current stats including health, XP, level, and inventory.
+     *
+     * @param player The player whose stats are displayed.
+     */
     public static void printCharacterStats(Player player) {
         printSeparator();
         System.out.println("CHARACTER INFO:");
@@ -48,11 +72,17 @@ public class InputHandler {
         waitForEnter();
     }
 
+    /**
+     * Waits for the user to press Enter before continuing.
+     */
     public static void waitForEnter() {
         System.out.println("Press Enter to continue...");
         input_scanner.nextLine();
     }
 
+    /**
+     * Displays the menu of available actions in a room.
+     */
     public static void printRoomMenu() {
         System.out.println("\nChoose an action:");
         printSeparator();
@@ -63,6 +93,9 @@ public class InputHandler {
         System.out.println("5. Exit");
     }
 
+    /**
+     * Prints a separator line of '=' characters.
+     */
     public static void printSeparator() {
         for (int i = 0; i < sepLength; ++i) {
             System.out.print('=');
@@ -70,6 +103,12 @@ public class InputHandler {
         System.out.println();
     }
 
+    /**
+     * Displays the available directions to move in the current room and gets the player's choice.
+     *
+     * @param currentRoomObj The current room object.
+     * @return The chosen direction or stay option.
+     */
     public static int moveInCurrentRoom(Room currentRoomObj) {
         if (currentRoomObj == null) {
             System.out.println("Error: Current room not found in map!");

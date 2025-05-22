@@ -15,12 +15,20 @@ import cz.cuni.mff.dockalea.items.Weapon;
 import java.util.Hashtable;
 import java.util.List;
 
+/**
+ * Main entry point of the game. Manages the game loop and player interactions with rooms and enemies.
+ */
 public class Main {
     private static boolean isRunning = true;
     private static Player player = new Player(100, 1, 0);
     private static Hashtable<String, Room> map;
     private static String currentRoom;
 
+    /**
+     * Loads the map and starts the game loop.
+     *
+     * @param args Command line arguments (unused).
+     */
     public static void main(String[] args) {
         // Load Rooms and check if the current one is present
         RoomData mapData = Map.loadMapFromTxtFile("WorldMap.txt");
@@ -37,6 +45,9 @@ public class Main {
         }
     }
 
+    /**
+     * The core game loop. Handles room logic, combat, and player input.
+     */
     public static void gameLoop() {
         while (isRunning && player.isAlive()) {
             Room room = map.get(currentRoom);
@@ -88,6 +99,11 @@ public class Main {
         }
     }
 
+    /**
+     * Spawns an enemy in the given room based on player level and room type.
+     *
+     * @param room The room to spawn the enemy in.
+     */
     private static void spawnEnemy(Room room) {
         boolean isBoss = room.isBossRoom();
         Enemy enemy = EnemyGenerator.generateEnemy(player.getLevel(), isBoss);
@@ -100,6 +116,11 @@ public class Main {
         }
     }
 
+    /**
+     * Allows the player to explore a room and possibly find items.
+     *
+     * @param room The room being explored.
+     */
     private static void exploreRoom(Room room) {
         if (room.isExplored()) {
             System.out.println("You have already explored this room thoroughly.");
@@ -121,6 +142,9 @@ public class Main {
         InputHandler.waitForEnter();
     }
 
+    /**
+     * Displays and handles inventory management options.
+     */
     private static void manageInventory() {
         System.out.println("\n=== INVENTORY MANAGEMENT ===");
         System.out.println("1. Use/Equip Item");
@@ -141,6 +165,9 @@ public class Main {
         }
     }
 
+    /**
+     * Allows the player to use or equip an item from the inventory.
+     */
     private static void useEquipItem() {
         if (player.getInventory().isEmpty()) {
             System.out.println("Your inventory is empty!");
@@ -170,6 +197,9 @@ public class Main {
         InputHandler.waitForEnter();
     }
 
+    /**
+     * Allows the player to discard an item from the inventory.
+     */
     private static void discardItem() {
         if (player.getInventory().isEmpty()) {
             System.out.println("Your inventory is empty!");
@@ -195,6 +225,9 @@ public class Main {
         InputHandler.waitForEnter();
     }
 
+    /**
+     * Handles movement to a different room based on the player's choice.
+     */
     public static void move() {
         Room currentRoomObj = map.get(currentRoom);
         int choice = InputHandler.moveInCurrentRoom(currentRoomObj);
