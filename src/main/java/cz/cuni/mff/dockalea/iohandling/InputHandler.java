@@ -28,9 +28,9 @@ public class InputHandler {
     }
 
     public static void printCharacterStats(Player player) {
-        printSeparator(sepLength);
+        printSeparator();
         System.out.println("CHARACTER INFO:");
-        printSeparator(sepLength);
+        printSeparator();
         System.out.println("Health: " + player.getCurrentHealth() + "/" + player.getMaxHealth());
         System.out.println("XP: " + player.getXp());
         System.out.println("Level: " + player.getLevel());
@@ -49,15 +49,15 @@ public class InputHandler {
 
     public static void printRoomMenu() {
         System.out.println("\nChoose an action:");
-        printSeparator(sepLength);
+        printSeparator();
         System.out.println("1. Move to another room");
         System.out.println("2. Explore current room");
         System.out.println("3. Character info");
         System.out.println("4. Exit");
     }
 
-    public static void printSeparator(int length) {
-        for (int i = 0; i < length; ++i) {
+    public static void printSeparator() {
+        for (int i = 0; i < sepLength; ++i) {
             System.out.print('=');
         }
         System.out.println();
