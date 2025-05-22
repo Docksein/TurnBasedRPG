@@ -6,8 +6,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Hashtable;
 
+/**
+ * Utility class responsible for loading the map layout and room data from text files.
+ * Provides methods for parsing a room file into a structured representation of the game world.
+ */
 public class Map {
 
+    /**
+     * Loads room data from a specified text file.
+     *
+     * @param fileName the name of the file containing room definitions
+     * @return a RoomData object containing all rooms and the name of the starting room
+     * @throws RuntimeException if an error occurs while reading the file
+     */
     public static RoomData loadMapFromTxtFile(String fileName) {
         RoomData worldMapData;
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -19,6 +30,18 @@ public class Map {
         return worldMapData;
     }
 
+    /**
+     * Loads and parses room definitions from a BufferedReader.
+     * Each room must begin with a header line starting with '#' followed by optional connections and description.
+     * The description starts at the new line and ends with detection of another room or end of the file.
+     * New room gets parsed when the line starts with '#' again.
+     * The room layout should look like this:
+     * # RoomName | North | South | East | West
+     * Description
+     *
+     * @param reader the reader providing room file input
+     * @return a RoomData object containing parsed rooms and the name of the starting room
+     */
     public static RoomData loadRoomsBufferReader(BufferedReader reader) {
         Hashtable<String, Room> rooms = new Hashtable<>();
         String firstRoomName = null;
@@ -34,20 +57,17 @@ public class Map {
 
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("#")) {
-                    // If we've been processing a room, create it before starting a new one
                     if (currentRoomName != null) {
                         Room room = new Room(currentRoomName, description.toString().trim(), north, south, east, west);
                         rooms.put(currentRoomName, room);
                     }
 
-                    // Reset for new room
                     description = new StringBuilder();
 
                     // Parse the room header line: # RoomName | North | South | East | West
                     String[] parts = line.substring(1).split("\\|");
                     currentRoomName = parts[0].trim();
 
-                    // Save the first room name we encounter
                     if (firstRoomName == null) {
                         firstRoomName = currentRoomName;
                     }
@@ -58,15 +78,13 @@ public class Map {
                     east = parts.length > 3 && !parts[3].trim().isEmpty() ? parts[3].trim() : null;
                     west = parts.length > 4 && !parts[4].trim().isEmpty() ? parts[4].trim() : null;
                 } else {
-                    // Add to the description
-                    if (description.length() > 0) {
+                    if (!description.isEmpty()) {
                         description.append("\n");
                     }
                     description.append(line);
                 }
             }
 
-            // Don't forget the last room
             if (currentRoomName != null) {
                 Room room = new Room(currentRoomName, description.toString().trim(), north, south, east, west);
                 rooms.put(currentRoomName, room);
