@@ -14,16 +14,7 @@ import cz.cuni.mff.dockalea.entities.Player;
  * @author Adam Dočkálek
  */
 public abstract class Item {
-    /**
-     * The name of the item. This is a short, human-readable identifier used to
-     * display the item in inventories, tooltips, and menus.
-     */
     protected final String name;
-
-    /**
-     * A textual description of the item. This can be used to provide lore,
-     * instructions, or effects related to the item.
-     */
     protected final String description;
 
     /**
