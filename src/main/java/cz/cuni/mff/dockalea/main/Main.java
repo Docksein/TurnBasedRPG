@@ -36,9 +36,7 @@ public class Main {
         currentRoom = mapData.currentRoomName;
         if (map.containsKey(currentRoom)) {
             Room r = map.get(currentRoom);
-            System.out.println("Current location: " + currentRoom);
-            InputHandler.printSeparator();
-            System.out.println(r.Description);
+            InputHandler.printRoom(r);
             gameLoop();
         } else {
             System.out.println("Error, Room: " + currentRoom + " is not in the map");
@@ -265,6 +263,7 @@ public class Main {
         if (nextRoom != null) {
             currentRoom = nextRoom;
             System.out.println("You moved to: " + currentRoom);
+            InputHandler.printRoom(map.get(currentRoom));
         }
     }
 }

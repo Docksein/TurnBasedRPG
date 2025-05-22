@@ -115,8 +115,7 @@ public class InputHandler {
             return 0;
         }
 
-        System.out.println("\n=== " + currentRoomObj.Name + " ===");
-        System.out.println(currentRoomObj.Description);
+        printRoom(currentRoomObj);
         System.out.println("\nAvailable directions:");
 
         int directionCount = 0;
@@ -145,5 +144,16 @@ public class InputHandler {
         System.out.println(directionCount + ". Stay here");
 
         return getNextChoice(directionCount, "Where you want to go: ");
+    }
+
+    /**
+     * Prints the name, description, and available directions of the specified room to the console.
+     *
+     * @param currentRoomObj The {@code Room} object whose details are to be printed.
+     */
+    public static void printRoom(Room currentRoomObj){
+        System.out.println("\n=== " + currentRoomObj.Name + " ===");
+        System.out.println(currentRoomObj.Description);
+
     }
 }

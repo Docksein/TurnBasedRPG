@@ -1,5 +1,12 @@
-# Room 1 | Boss Room | | |
-This is the first room.
+# Entrance | Library | | |
+You open the great wooden doors and enter into the dungeon.
 Good Luck!
-# Boss Room | | Room 1 | |
-This is the boss room.
+# Library | | Entrance | | Boss Chamber
+Ancient tomes and scrolls fill the shelves from floor to ceiling. The air smells of old parchment and leather bindings.
+A reading desk sits in the center with an open book.
+# Boss Chamber | | | Library | Boss Lair
+This ominous chamber pulses with malevolent energy.
+This is clearly the domain of a powerful boss creature but you can hear a distant growl from what seems to be even more powerful creature.
+# Boss Lair | | | Boss Chamber |
+You have entered the lair of an ancient red dragon.
+The cavern is enormous, with piles of treasure scattered about and scorch marks covering the walls.
