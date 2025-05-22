@@ -2,12 +2,13 @@ package cz.cuni.mff.dockalea.iohandling;
 
 import cz.cuni.mff.dockalea.entities.Player;
 import cz.cuni.mff.dockalea.environment.Room;
+import cz.cuni.mff.dockalea.items.Item;
 
 import java.util.Scanner;
 
 public class InputHandler {
     private static Scanner input_scanner = new Scanner(System.in);
-    public static int sepLength;
+    public static int sepLength = 40;
 
     public static int getNextChoice(int actionChoices, String prompt) {
         int choice = -1;
@@ -27,24 +28,33 @@ public class InputHandler {
     }
 
     public static void printCharacterStats(Player player) {
-        InputHandler.printSeparator(sepLength);
+        printSeparator(sepLength);
         System.out.println("CHARACTER INFO:");
-        InputHandler.printSeparator(sepLength);
+        printSeparator(sepLength);
         System.out.println("Health: " + player.getCurrentHealth() + "/" + player.getMaxHealth());
         System.out.println("XP: " + player.getXp());
         System.out.println("Level: " + player.getLevel());
+        System.out.println("Equipped Weapon: " + player.getInventory().getEquippedWeapon().getName() +
+                " (Damage: " + player.getInventory().getEquippedWeapon().getDamage() + ")");
+        System.out.println("Inventory: " + player.getInventory().getSize() + "/" + player.getInventory().getMaxSize());
+
+        if (!player.getInventory().isEmpty()) {
+            System.out.println("Items:");
+            for (Item item : player.getInventory().getItems()) {
+                System.out.println("  - " + item.getName() + " (" + item.getType() + ")");
+            }
+        }
         System.out.println();
     }
 
-
-    public static void printMenu() {
-        System.out.println("Choose an action:");
+    public static void printRoomMenu() {
+        System.out.println("\nChoose an action:");
         printSeparator(sepLength);
-        System.out.println("1. Continue");
-        System.out.println("2. Character info");
-        System.out.println("3. Exit");
+        System.out.println("1. Move to another room");
+        System.out.println("2. Explore current room");
+        System.out.println("3. Character info");
+        System.out.println("4. Exit");
     }
-
 
     public static void printSeparator(int length) {
         for (int i = 0; i < length; ++i) {
