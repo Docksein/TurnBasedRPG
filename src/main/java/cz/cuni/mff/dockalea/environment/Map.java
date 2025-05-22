@@ -9,6 +9,7 @@ import java.util.Hashtable;
 /**
  * Utility class responsible for loading the map layout and room data from text files.
  * Provides methods for parsing a room file into a structured representation of the game world.
+ * The methods do not check the connectivity or consistency of the map - user has to check it in the file itself.
  */
 public class Map {
 
