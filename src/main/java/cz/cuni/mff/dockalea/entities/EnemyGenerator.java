@@ -9,12 +9,15 @@ import java.util.Random;
  * Boss enemies have stronger attributes.</p>
  */
 public class EnemyGenerator {
+    /** Random number generator used for enemy selection and randomization. */
     private static final Random random = new Random();
 
+    /** List of names for common (non-boss) enemies. */
     private static final String[] commonEnemyNames = {
             "Goblin", "Orc", "Skeleton", "Wolf", "Spider", "Bandit"
     };
 
+    /** List of names for boss enemies. */
     private static final String[] bossNames = {
             "Goblin King", "Orc Warlord", "Lich", "Dragon", "Giant Spider", "Bandit Leader"
     };

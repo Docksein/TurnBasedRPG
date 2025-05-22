@@ -12,9 +12,16 @@ import java.util.List;
  * Handles turn-based attacks, guarding, using items, and fleeing.
  */
 public class Combat {
+    /** The player participating in the combat. */
     private final Player player;
+
+    /** The enemy opponent in the combat. */
     private final Enemy enemy;
+
+    /** Indicates whether the combat is currently active. */
     private boolean combatActive;
+
+    /** Indicates whether the player is currently guarding. */
     private boolean playerGuarding;
 
     /**

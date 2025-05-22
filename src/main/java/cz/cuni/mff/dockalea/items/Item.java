@@ -14,7 +14,10 @@ import cz.cuni.mff.dockalea.entities.Player;
  * @author Adam Dočkálek
  */
 public abstract class Item {
+    /** The name of the item, used for display and identification. */
     protected final String name;
+
+    /** A brief description of the item. */
     protected final String description;
 
     /**

@@ -10,15 +10,26 @@ import cz.cuni.mff.dockalea.items.ItemGenerator;
  * They reward XP upon defeat and may drop items.</p>
  */
 public class Enemy extends Entity {
+    /**
+     * The name of the enemy.
+     */
     private final String name;
+
+    /**
+     * Whether the enemy is a boss.
+     */
     private final boolean isBoss;
+
+    /**
+     * The amount of experience points awarded when this enemy is defeated.
+     */
     private final int xpReward;
 
     /**
      * Constructs an enemy with a name, level, and boss status.
      *
-     * @param name the name of the enemy
-     * @param level the level of the enemy
+     * @param name   the name of the enemy
+     * @param level  the level of the enemy
      * @param isBoss {@code true} if this enemy is a boss
      */
     public Enemy(String name, int level, boolean isBoss) {
@@ -28,14 +39,44 @@ public class Enemy extends Entity {
         this.xpReward = level * (isBoss ? 50 : 10);
     }
 
+    /**
+     * Calculates the health of an enemy based on its level and boss status.
+     *
+     * @param level  the level of the enemy
+     * @param isBoss {@code true} if the enemy is a boss, {@code false} otherwise
+     * @return the calculated health value
+     */
     private static int calculateHealth(int level, boolean isBoss) {
         int baseHealth = 30 + (level * 10);
         return isBoss ? baseHealth * 2 : baseHealth;
     }
 
-    public String getName() { return name; }
-    public boolean isBoss() { return isBoss; }
-    public int getXpReward() { return xpReward; }
+    /**
+     * Returns the name of the enemy.
+     *
+     * @return the enemy's name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Checks if the enemy is a boss.
+     *
+     * @return {@code true} if the enemy is a boss, {@code false} otherwise
+     */
+    public boolean isBoss() {
+        return isBoss;
+    }
+
+    /**
+     * Gets the amount of experience points awarded for defeating this enemy.
+     *
+     * @return the XP reward value
+     */
+    public int getXpReward() {
+        return xpReward;
+    }
 
     /**
      * Performs an attack, randomly choosing between light and strong attacks.
@@ -49,7 +90,7 @@ public class Enemy extends Entity {
         int baseDamage = 5 + level * 2;
 
         if (isHardAttack) {
-            int damage = (int)(baseDamage * 1.5);
+            int damage = (int) (baseDamage * 1.5);
             System.out.println(name + " uses a powerful attack!");
             return damage;
         } else {

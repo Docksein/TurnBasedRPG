@@ -34,9 +34,32 @@ public abstract class Entity {
         this.level = level;
     }
 
-    public int getMaxHealth() { return maxHealth; }
-    public int getCurrentHealth() { return currentHealth; }
-    public int getLevel() { return level; }
+    /**
+     * Gets the maximum health of the entity.
+     *
+     * @return the maximum health
+     */
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    /**
+     * Gets the current health of the entity.
+     *
+     * @return the current health
+     */
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    /**
+     * Gets the level of the entity.
+     *
+     * @return the entity's level
+     */
+    public int getLevel() {
+        return level;
+    }
 
     /**
      * Sets the current health of the entity, ensuring it stays within valid bounds.

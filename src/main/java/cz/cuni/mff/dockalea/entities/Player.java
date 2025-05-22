@@ -10,9 +10,16 @@ import cz.cuni.mff.dockalea.items.Weapon;
  * equip weapons, heal, and gain temporary boosts during combat.</p>
  */
 public class Player extends Entity {
+    /** The player's current experience points. */
     private int xp;
+
+    /** The player's inventory with a fixed maximum size. */
     private final Inventory inventory;
+
+    /** Temporary damage bonus applied during combat (e.g., from potions). */
     private int temporaryDamageBoost;
+
+    /** The maximum number of items the player's inventory can hold. */
     private final int maxInventorySize = 10;
 
     /**
@@ -31,8 +38,23 @@ public class Player extends Entity {
         this.temporaryDamageBoost = 0;
     }
 
-    public int getXp() { return xp; }
-    public Inventory getInventory() { return inventory; }
+    /**
+     * Returns the current experience points (XP) of the player.
+     *
+     * @return the player's XP
+     */
+    public int getXp() {
+        return xp;
+    }
+
+    /**
+     * Returns the player's inventory.
+     *
+     * @return the player's inventory object
+     */
+    public Inventory getInventory() {
+        return inventory;
+    }
 
     /**
      * Simple leveling system.
